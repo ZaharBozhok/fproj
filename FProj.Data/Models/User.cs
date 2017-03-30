@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FProj.Data
@@ -16,6 +17,12 @@ namespace FProj.Data
         public string Login { get; set; }
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<Film> Films { get; set; }
         public virtual UserAccount UserAccount { get; set; }
+
+        public User()
+        {
+            Films = new HashSet<Film>();
+        }
     }
 }

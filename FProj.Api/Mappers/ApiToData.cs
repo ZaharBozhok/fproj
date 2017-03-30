@@ -15,17 +15,58 @@ namespace FProj.Api
                 Rate = filmApi.Rate,
                 Title = filmApi.Title,
                 DateCreated = filmApi.DateCreated,
-                UserIdCreator = filmApi.User == null ? 0 : filmApi.User.Id                
+                UserIdCreator = filmApi.User.Id               
             };
         }
 
-        public static Image ImageApiToData(ImageApi imageApi, int filmId, bool IsPoster = false)
+        public static Image ImageApiToData(ImageApi imageApi, int filmId, bool isPoster = false)
         {
             return new Image() {
                 FilmId = filmId,
-                IsPoster = IsPoster,
+                IsPoster = isPoster,
                 Id = imageApi.Id,
                 Name = imageApi.Path
+            };
+        }
+
+        public static Actor ActorApiToData(ActorApi actorApi)
+        {
+            return new Actor()
+            {
+                FirstName = actorApi.FirstName,
+                Id = actorApi.Id,
+                LastName = actorApi.LastName
+            };
+        }
+
+        public static Genre GenreApiToData(GenreApi genreApi)
+        {
+            return new Genre()
+            {
+                Description = genreApi.Description,
+                Id = genreApi.Id,
+                Title = genreApi.Title
+            };
+        }
+
+        public static User UserApiToData(UserApi userApi)
+        {
+            return new User() {
+                FirtsName = userApi.FirstName,
+                Id = userApi.Id,
+                LastName = userApi.LastName,
+                Login = userApi.Login
+            };
+        }
+
+        public static Comment CommentApiToData(CommentApi commentApi)
+        {
+            return new Comment()
+            {
+                Text = commentApi.Text,
+                DateCreated = commentApi.DateCreated,
+                Id = commentApi.Id,
+                UserId = commentApi.User.Id
             };
         }
     }

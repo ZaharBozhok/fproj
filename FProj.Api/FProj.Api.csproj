@@ -43,7 +43,10 @@
     <Compile Include="Interfaces\IId.cs" />
     <Compile Include="Mappers\ApiToData.cs" />
     <Compile Include="Mappers\DataToApi.cs" />
+    <Compile Include="Models\ActorApi.cs" />
+    <Compile Include="Models\CommentApi.cs" />
     <Compile Include="Models\FilmApi.cs" />
+    <Compile Include="Models\GenreApi.cs" />
     <Compile Include="Models\ImageApi.cs" />
     <Compile Include="Models\UserApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

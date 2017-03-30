@@ -12,12 +12,12 @@ namespace FProj.Data
 
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        [ForeignKey(nameof(Film))]
+        //[ForeignKey(nameof(Film))]
         public int FilmId { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsDeleted { get; set; }
 
         public virtual User User { get; set; }
-        public virtual Film Film { get; set; }
+        //public virtual Film Film { get; set; }
     }
 }

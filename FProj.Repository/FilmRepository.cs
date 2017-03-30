@@ -3,7 +3,6 @@ using FProj.Data;
 using System.Collections.Generic;
 using System.Linq;
 using FProj.Api;
-using System;
 
 namespace FProj.Repository
 {
@@ -39,13 +38,17 @@ namespace FProj.Repository
         public List<FilmApi> GetAll(bool IsDeleted = false)
         {
             var filmData = _dbContext.Film.Where(x => x.IsDeleted == IsDeleted).ToList();
-            var filmApi = filmData.Select(x => DataToApi.FilmToApi(x, _dbContext.User.FirstOrDefault(u => u.Id == x.UserIdCreator)));
+            var filmApi = filmData.Select(x => DataToApi.FilmToApi(x));
             return filmApi.ToList();
         }
 
         public FilmApi GetById(int Id)
         {
-            throw new NotImplementedException();
+            var filmData = _dbContext.Film.FirstOrDefault(x => x.Id == Id);
+
+            if (filmData == null) return null;
+
+            return DataToApi.FilmToApi(filmData);
         }
 
         public FilmApi Update(FilmApi model)

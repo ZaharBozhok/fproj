@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FProj.Data
 {
@@ -16,17 +17,16 @@ namespace FProj.Data
         public double Rate { get; set; }
         public double? Duration { get; set; }
         public bool IsDeleted { get; set; }
+        [ForeignKey(nameof(UserCreator))]
         public int UserIdCreator { get; set; }
         public string Director { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
-
+        public virtual User UserCreator { get; set; }
         public Film()
         {
-            Comments = new HashSet<Comment>();
             Images = new HashSet<Image>();
             Actors = new HashSet<Actor>();
             Genres = new HashSet<Genre>();

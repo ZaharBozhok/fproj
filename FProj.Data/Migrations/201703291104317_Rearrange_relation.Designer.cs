@@ -7,13 +7,13 @@ namespace FProj.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class Rearrange_relation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Rearrange_relation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703190815081_Initial"; }
+            get { return "201703291104317_Rearrange_relation"; }
         }
         
         string IMigrationMetadata.Source
