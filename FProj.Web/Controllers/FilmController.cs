@@ -11,12 +11,5 @@ namespace FProj.Web.Controllers
     {
         // GET: Film
         public ActionResult Index() => View(UnitOfWork.Instance.FilmRepository.GetAll());
-
-        [HttpGet]
-        public ActionResult GetGenres()
-        {
-            var list = new string[] { "test", "ne test", "ne test", "ne test", "ne test", "ne test", "ne test" };
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
     }
 }
