@@ -3,10 +3,49 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
 @foreach (var film in Model)
 {
-    <p>@film.Title</p>
-}
+    <div class="col-md-12">
+        <div class="col-md-4">
+            @if (@film.Poster != null)
+            {
+                <img class="img-thumbnail poster" src="@film.Poster.Path" />
+            }
+        </div>
+        <div class="col-md-8">
+            <h3><b>@film.Title</b></h3>
+            <table class="table table-responsive table-hover" style="text-align:justify">
+                <tr>
+                    <td>Director</td>
+                    <td>@film.Director</td>
+                </tr>
 
+                <tr>
+                    <td>Duration</td>
+                    <td>@film.Duration min</td>
+                </tr>
+
+                <tr>
+                    <td>Premiere Date</td>
+                    <td>@film.PremiereDate.ToShortDateString()</td>
+                </tr>
+
+                <tr>
+                    <td>Rate</td>
+                    <td>@film.Rate+</td>
+                </tr>
+
+                <tr>
+                    <td>Description</td>
+                    <td>@film.Description</td>
+                </tr>    
+                
+
+                <tr>
+                    <td>@Html.ActionLink("Details", "Details", new { Id = film.Id })</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>        
+    </div>
+}

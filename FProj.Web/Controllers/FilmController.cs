@@ -1,6 +1,7 @@
 ﻿using FProj.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,5 +12,17 @@ namespace FProj.Web.Controllers
     {
         // GET: Film
         public ActionResult Index() => View(UnitOfWork.Instance.FilmRepository.GetAll());
+
+        public ActionResult Details(int Id) => View(UnitOfWork.Instance.FilmRepository.GetById(Id));
+
+        [HttpPost]
+        public ActionResult UploadPoster(int Id, HttpPostedFileBase file) {
+            string uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string localPath = Path.Combine(Server.MapPath("~/images/films"), uniqueName);
+
+            file.SaveAs(localPath);
+            UnitOfWork.Instance.ImageRepository.AddPoster(new Api.ImageApi() { Path = "/images/films/" + uniqueName }, Id);
+            return View("Details", UnitOfWork.Instance.FilmRepository.GetById(Id));
+        }
     }
 }
