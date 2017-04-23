@@ -1,5 +1,6 @@
 ﻿using FProj.Data;
 using System.Linq;
+using System.Web.Configuration;
 
 namespace FProj.Api
 {
@@ -19,7 +20,7 @@ namespace FProj.Api
                 Rate = film.Rate,
                 User = UserToApi(film.UserCreator),
                 Poster = ImageToApi(film.Images.FirstOrDefault(x => !x.IsDeleted && x.IsPoster)),
-                Pictures = film.Images?.Where(x => !x.IsPoster && !x.IsDeleted)?.Select(x => ImageToApi(x)).ToList()
+                Pictures = film.Images?.Where(x => !x.IsPoster && !x.IsDeleted).Select(x => ImageToApi(x)).ToList()
             };
         }
 
@@ -42,7 +43,7 @@ namespace FProj.Api
             return new ImageApi()
             {
                 Id = image.Id,
-                Path = image.Name
+                Path = WebConfigurationManager.AppSettings["ImageFolder"] + image.Name
             };
         }
 

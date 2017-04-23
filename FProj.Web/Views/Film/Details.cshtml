@@ -10,7 +10,7 @@
     <div class="col-md-4">
         @if (@Model.Poster != null)
         {
-            <img class="img-thumbnail poster"src="@Model.Poster.Path"/>
+            <img class="img-thumbnail poster" src="@Model.Poster.Path" />
         }
     </div>
     <div class="col-md-8">
@@ -44,13 +44,40 @@
             <tr>
                 <td>Poster</td>
                 <td>
-                    @using (Html.BeginForm("UploadPoster", "Film", new { Id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        <input class="form-control" type="file" name="file"/>
-                        <button type="submit" id="uploader" class="btn btn-primary">Upload</button>
-                    }                    
+                    <form id="FormData" enctype="multipart/form-data">
+                        <input class="form-control" type="hidden" name="Id" value="@Model.Id" />
+                        <input class="form-control" type="file" name="file" />
+                        <button id="uploader" class="btn btn-primary">Upload</button>
+                    </form>
                 </td>
             </tr>
         </table>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $("#uploader").click(submitUpload);
+
+        function submitUpload() {
+            var formData = new FormData($("#FormData")[0]);
+
+            $.ajax({
+                async: true,
+                type: "post",
+                url: '@Url.Action("UploadPoster")',
+                data: formData,
+                success: function(response) {
+                    if (response.Ok)
+                        $(".poster").attr("src", response.Path);
+                },
+                error: function (response) { console.log(response); },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+            return false;
+        }
+
+    });
+</script>

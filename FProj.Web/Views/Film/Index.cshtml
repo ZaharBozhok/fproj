@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-8">
             <h3><b>@film.Title</b></h3>
-            <table class="table table-responsive table-hover" style="text-align:justify">
+            <table class="table table-responsive" style="text-align:justify">
                 <tr>
                     <td>Director</td>
                     <td>@film.Director</td>
@@ -42,10 +42,23 @@
                 
 
                 <tr>
-                    <td>@Html.ActionLink("Details", "Details", new { Id = film.Id })</td>
+                    <td>
+                        <button class="btn btn-primary details" data-id="@film.Id">Details</button>
+                        
+                    </td>
                     <td></td>
                 </tr>
             </table>
         </div>        
     </div>
 }
+
+<script>
+
+$(function() {
+    $(".details").click(function () {
+        location.href = '@Url.Action("Details")/' + $(this).attr("data-id");
+    });
+})
+
+</script>

@@ -167,6 +167,9 @@
     <Content Include="images\501.jpg" />
     <Content Include="images\502.jpg" />
     <Content Include="images\555.jpg" />
+    <Content Include="images\main\main1.jpg" />
+    <Content Include="images\main\main2.jpg" />
+    <Content Include="images\main\main3.jpg" />
     <Content Include="images\sm1.jpg" />
     <Content Include="images\sm2.jpg" />
     <Content Include="images\sm3.jpg" />

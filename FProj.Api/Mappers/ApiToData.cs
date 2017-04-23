@@ -1,4 +1,5 @@
-﻿using FProj.Data;
+﻿using System.Web.Configuration;
+using FProj.Data;
 
 namespace FProj.Api
 {
@@ -25,7 +26,7 @@ namespace FProj.Api
                 FilmId = filmId,
                 IsPoster = isPoster,
                 Id = imageApi.Id,
-                Name = imageApi.Path
+                Name = imageApi.Path?.Replace(WebConfigurationManager.AppSettings["ImageFolder"], "")
             };
         }
 

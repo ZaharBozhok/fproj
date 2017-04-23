@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace FProj.Web.Controllers
@@ -18,11 +19,11 @@ namespace FProj.Web.Controllers
         [HttpPost]
         public ActionResult UploadPoster(int Id, HttpPostedFileBase file) {
             string uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            string localPath = Path.Combine(Server.MapPath("~/images/films"), uniqueName);
-
+            string localPath = Path.Combine(Server.MapPath($"~{WebConfigurationManager.AppSettings["ImageFolder"]}"), uniqueName);
+            
             file.SaveAs(localPath);
-            UnitOfWork.Instance.ImageRepository.AddPoster(new Api.ImageApi() { Path = "/images/films/" + uniqueName }, Id);
-            return View("Details", UnitOfWork.Instance.FilmRepository.GetById(Id));
+            var path = UnitOfWork.Instance.ImageRepository.AddPoster(new Api.ImageApi() { Path = uniqueName }, Id);
+            return Json(new { Ok = true, Path = WebConfigurationManager.AppSettings["ImageFolder"] + path });
         }
     }
 }
